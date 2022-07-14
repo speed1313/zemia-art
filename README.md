@@ -12,10 +12,10 @@ this is a reposiitory for zemi A with Adversarial Robustness toolbox.
 
 hoge_plot.pngとhoge_plot_random_ver.pngを比較するとわかるように, FGSMはターゲットのpredictionがrandom verに比べて傾きが大きいことがわかる. これにより, epsilonが小さい範囲で誤りを最大化させるというミッションにおいてFGSMが有効であることがわかる.
 
-[0_7_plot.png](0_7_plot.png)
+![0_7_plot.png](0_7_plot.png)
 
 
-[0_7_plot_random_ver.png](0_7_plot_random_ver.png)
+![0_7_plot_random_ver.png](0_7_plot_random_ver.png)
 
 ## FGSM, random noiseのAccuracyの比較
 eps = 0.1 + 0.1 * i (i=0,..,9)としてFGSM及びrandom noiseによるaccuracyの比較を行った.
