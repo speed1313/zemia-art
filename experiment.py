@@ -80,8 +80,12 @@ classifier = TensorFlowV2Classifier(
 )
 
 # Step 4: Train the ART classifier
-
 classifier.fit(x_train, y_train, batch_size=64, nb_epochs=3)
+
+import os
+dirname = "image/"
+os.makedirs(dirname, exist_ok=True)
+
 for i in range(5):
     noise_list = []
     epsilon_list = [j * 0.1 for j in range(15)]
@@ -97,21 +101,22 @@ for i in range(5):
         plt.imshow(x_test_adv[0])
         plt.viridis()
         plt.title(f"{np.argmax(prediction)}")
-        plt.savefig(f"{i}_{np.argmax(y_test[i])}.png")
+        plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}.png")
     plt.clf()
     for j in range(15):
         plt.subplot(3,5, j+1)
         plt.imshow(noise_list[j])
         plt.viridis()
         plt.title(f"{j}*0.1")
-        plt.savefig(f"{i}_{np.argmax(y_test[i])}_noise.png")
+        plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}_noise.png")
     plt.clf()
     for j in range(10):
         plt.plot(epsilon_list, [np.array(prediction_list)[k][0][j] for k in range(len(epsilon_list))], '-o')
         plt.xlabel("epsilon")
         plt.ylabel("prediction")
+        plt.title("FGSM version")
         plt.legend(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], loc='upper right', framealpha = 0.3)
-    plt.savefig(f"{i}_{np.argmax(y_test[i])}_plot.png")
+    plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}_plot.png")
 
 for i in range(5):
     noise_list = []
@@ -130,19 +135,20 @@ for i in range(5):
         plt.imshow(x_test_adv)
         plt.viridis()
         plt.title(f"{np.argmax(prediction)}")
-        plt.savefig(f"{i}_{np.argmax(y_test[i])}_random_ver.png")
+        plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}_random_ver.png")
     plt.clf()
     for j in range(15):
         plt.subplot(3,5, j+1)
         plt.imshow(noise_list[j])
         plt.viridis()
         plt.title(f"{j}*0.1")
-        plt.savefig(f"{i}_{np.argmax(y_test[i])}_noise_random_ver.png")
+        plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}_noise_random_ver.png")
     plt.clf()
     for j in range(10):
         plt.plot(epsilon_list, [np.array(prediction_list)[k][0][j] for k in range(len(epsilon_list))], '-o')
         plt.xlabel("epsilon")
         plt.ylabel("prediction")
+        plt.title("random version")
         plt.legend(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], loc='upper right', framealpha = 0.3)
-    plt.savefig(f"{i}_{np.argmax(y_test[i])}_plot_random_ver.png")
+    plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}_plot_random_ver.png")
     plt.clf()
