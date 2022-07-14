@@ -117,9 +117,10 @@ for i in range(5):
     noise_list = []
     epsilon_list = [j * 0.1 for j in range(15)]
     prediction_list = []
+    random = np.random.randn(28,28,1)
     for j in range(15):
         epsilon = j*0.1
-        noise = epsilon * np.random.randn(28,28,1)
+        noise = epsilon * random
         x_test_adv = x_test[i] + noise
         noise_list.append(noise)
         prediction = classifier.predict([x_test_adv])
