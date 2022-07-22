@@ -152,3 +152,4 @@ for i in range(5):
         plt.legend(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], loc='upper right', framealpha = 0.3)
     plt.savefig(f"{dirname}/{i}_{np.argmax(y_test[i])}_plot_random_ver.png")
     plt.clf()
+
