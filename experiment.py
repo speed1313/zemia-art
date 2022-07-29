@@ -83,7 +83,7 @@ classifier = TensorFlowV2Classifier(
 classifier.fit(x_train, y_train, batch_size=64, nb_epochs=3)
 
 import os
-dirname = "image/"
+dirname = "uniform_image_without_sign/"
 os.makedirs(dirname, exist_ok=True)
 
 for i in range(5):
@@ -93,9 +93,10 @@ for i in range(5):
     for j in range(15):
         epsilon = j*0.1
         attack = FastGradientMethod(estimator=classifier, eps=epsilon)
-        x_test_adv = attack.generate(x=x_test[i:i+1])
+        x_test_adv = x_test[i] + epsilon * classifier.loss_gradient(x_test[i:i+1], y_test[i:i+1])
+        print(x_test_adv[0])
         noise_list.append(x_test[i] - x_test_adv[0])
-        prediction = classifier.predict(x_test_adv[0:1])
+        prediction = classifier.predict(x_test_adv)
         prediction_list.append(prediction)
         plt.subplot(3, 5, j+1)
         plt.imshow(x_test_adv[0])
@@ -122,7 +123,8 @@ for i in range(5):
     noise_list = []
     epsilon_list = [j * 0.1 for j in range(15)]
     prediction_list = []
-    random = np.random.randn(28,28,1)
+    random = np.random.rand(28,28,1)
+    print(random)
     for j in range(15):
         epsilon = j*0.1
         noise = epsilon * random
