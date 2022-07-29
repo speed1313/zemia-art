@@ -54,6 +54,25 @@ Accuracy on random noise test exampels: 17.28%
 ```
 やはり, epsilonが小さい値において, FGSMの攻撃力の高さが窺える. 逆に言えば, Accuracyの観点ではFGSMは一定の範囲においてのみ特筆している.
 
+## 自作FGSM
+epsilon=0.1でかなり上手くいっているが, epsilonが大きくなると不安定になる.
+![4_4_plot.png](uniform_image/4_4_plot.png)
+
+
+![4_4.png](uniform_image/4_4.png)
+
+![4_4_noise.png](uniform_image/4_4_noise.png)
+
+## 自作FGSM without Sign
+
+勾配が小さすぎて摂動の影響がないことがわかる.
+![4_4_plot.png](uniform_image_without_sign/4_4_plot.png)
+
+
+![4_4.png](uniform_image_without_sign/4_4.png)
+
+![4_4_noise.png](uniform_image_without_sign/4_4_noise.png)
+
 # Usage
 ```
 $ git clone https://github.com/speed1313/zemia-art
